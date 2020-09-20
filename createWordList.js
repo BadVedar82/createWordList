@@ -17,6 +17,10 @@ function copyToClipboard(data) {
     proc.stdin.write(data); proc.stdin.end();
 }
 
+function isOSX() {
+    return process.platform === 'darwin';
+}
+
 fs.readFile(inFile, 'utf-8', (error, data) => {
     if (error) throw error;
 
@@ -48,5 +52,7 @@ fs.readFile(inFile, 'utf-8', (error, data) => {
         console.log(`Wrote ${outFile}`);
     });
 
-    copyToClipboard(allWords);
+    if (isOSX()) {
+        copyToClipboard(allWords);
+    }
 });
