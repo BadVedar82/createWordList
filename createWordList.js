@@ -33,7 +33,7 @@ fs.readFile(inFile, 'utf-8', (error, data) => {
         words = row.split(',');
         words.forEach((word, index) => {
             if (index === 0) {
-                // The first row is the timestamp
+                // The first column is the timestamp
                 return;
             }
 
