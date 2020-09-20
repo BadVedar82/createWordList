@@ -12,6 +12,11 @@ const outFile = process.argv[3];
 console.log(`Reading file ${inFile}`);
 console.log(`Processing...`);
 
+function copyToClipboard(data) {
+    var proc = require('child_process').spawn('pbcopy');
+    proc.stdin.write(data); proc.stdin.end();
+}
+
 fs.readFile(inFile, 'utf-8', (error, data) => {
     if (error) throw error;
 
@@ -36,8 +41,12 @@ fs.readFile(inFile, 'utf-8', (error, data) => {
         })
     });
 
-    fs.writeFile(outFile, outputWords.join(','), (err) => {
+    const allWords = outputWords.join(',');
+
+    fs.writeFile(outFile, allWords, (err) => {
         if (err) throw err;
         console.log(`Wrote ${outFile}`);
-      });
+    });
+
+    copyToClipboard(allWords);
 });
