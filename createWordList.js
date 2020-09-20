@@ -35,7 +35,7 @@ fs.readFile(inFile, 'utf-8', (error, data) => {
 
             const trimmedWord = word.trim();
 
-            if (trimmedWord.length > 0 && outputWords.indexOf(trimmedWord) === -1) {
+            if (trimmedWord.length > 0 && outputWords.indexOf(trimmedWord.toLowerCase()) === -1) {
                 outputWords.push(trimmedWord);
             }
         })
